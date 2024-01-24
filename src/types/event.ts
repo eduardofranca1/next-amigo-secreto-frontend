@@ -5,3 +5,9 @@ export type Event = {
   description: string;
   grouped: boolean;
 };
+
+export type AddEvent = {
+  title: string;
+  description: string;
+  grouped: boolean;
+};

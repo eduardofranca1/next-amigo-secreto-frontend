@@ -1,7 +1,7 @@
 "use client";
 
-import { Button } from "@/components/admin/button";
-import { InputField } from "@/components/admin/inputField";
+import { Button } from "@/components/admin/Button";
+import { InputField } from "@/components/admin/InputField";
 import { useState } from "react";
 import * as AdminApi from "@/api/admin";
 import { setCookie } from "cookies-next";
