@@ -1,6 +1,6 @@
 import { getCookie } from "cookies-next";
 import { req } from "./axios";
-import { AddEvent, Event } from "@/types/event";
+import { AddEvent, Event, UpdateEvent } from "@/types/event";
 
 export const login = async (password: string): Promise<string> => {
   try {
@@ -36,6 +36,24 @@ export const getEvents = async (): Promise<Event[] | []> => {
       },
     });
     return response.data.events;
+  } catch (error) {
+    console.log("🚀 ~ login ~ error:", error);
+    throw error;
+  }
+};
+
+export const updateEvent = async (
+  id: number,
+  data: UpdateEvent
+): Promise<Event> => {
+  try {
+    const token = getCookie("token");
+    const response = await req.put(`/admin/events/${id}`, data, {
+      headers: {
+        Authorization: `Token ${token}`,
+      },
+    });
+    return response.data.event;
   } catch (error) {
     console.log("🚀 ~ login ~ error:", error);
     throw error;

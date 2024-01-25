@@ -75,7 +75,7 @@ export const EventAdd = ({ refreshAction }: Props) => {
         <input
           type={"checkbox"}
           checked={grouped}
-          onChange={(e) => setGrouped(!grouped)}
+          onChange={(e) => setGrouped(e.target.checked)}
           className="block w-5 h-5 mt-3"
           disabled={loading}
         />

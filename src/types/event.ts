@@ -11,3 +11,10 @@ export type AddEvent = {
   description: string;
   grouped: boolean;
 };
+
+export type UpdateEvent = {
+  title?: string;
+  description?: string;
+  grouped?: boolean;
+  status?: boolean;
+};
