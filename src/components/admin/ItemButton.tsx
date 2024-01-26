@@ -29,7 +29,7 @@ export const ItemButton = ({
   );
 
   return (
-    <div className="rounded hover:bg-gray-900">
+    <div className="rounded hover:bg-gray-800">
       {href && !onClick && (
         <Link href={href} target={target} replace={replace}>
           {content}

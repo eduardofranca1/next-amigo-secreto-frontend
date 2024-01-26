@@ -43,7 +43,6 @@ export const EventTabInfo = ({ event, refreshAction }: Props) => {
         grouped,
         status,
       });
-      console.log("🚀 ~ handleSaveButton ~ result:", result);
       setLoading(false);
       if (result) refreshAction();
     } catch (error: any) {

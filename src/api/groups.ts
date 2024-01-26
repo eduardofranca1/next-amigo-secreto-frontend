@@ -76,6 +76,7 @@ export const deleteGroup = async (
   eventId: number,
   id: number
 ): Promise<Group | undefined> => {
+  console.log("🚀 ~ eventId:", eventId);
   try {
     const token = getCookie("token");
     const response = await req.delete(`/admin/events/${eventId}/groups/${id}`, {
