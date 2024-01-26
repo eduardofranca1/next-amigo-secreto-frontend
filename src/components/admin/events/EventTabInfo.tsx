@@ -48,6 +48,7 @@ export const EventTabInfo = ({ event, refreshAction }: Props) => {
       if (result) refreshAction();
     } catch (error: any) {
       setLoading(false);
+      refreshAction();
       alert(error.response.data);
     }
   };

@@ -49,7 +49,7 @@ export const AdminPage = () => {
       </div>
       <div className="my-3">
         {!loading &&
-          events.length > 0 &&
+          events?.length > 0 &&
           events.map((item) => (
             <EventItem
               key={item.id}
@@ -58,7 +58,7 @@ export const AdminPage = () => {
               openModal={(event) => editEvent(event)}
             />
           ))}
-        {!loading && events.length === 0 && <EventItemNotFound />}
+        {!loading && events?.length === 0 && <EventItemNotFound />}
         {loading && (
           <>
             <EventItemPlaceHolder />
