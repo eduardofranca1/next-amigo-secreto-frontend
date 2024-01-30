@@ -1,6 +1,6 @@
 import { Person } from "./person";
 
-export type People = Person & {
+export type PersonComplete = Person & {
   cpf: string;
   id_group: number;
   id_event: number;

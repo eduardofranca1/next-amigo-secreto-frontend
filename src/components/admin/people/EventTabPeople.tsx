@@ -3,10 +3,15 @@ import * as PeopleApi from "@/api/people";
 import { Group } from "@/types/group";
 import { useEffect, useState } from "react";
 import { GroupItemNotFound, GroupItemPlaceHolder } from "../groups/GroupItem";
-import { People } from "@/types/people";
-import { PersonItemNotFound, PersonItemPlaceHolder } from "./PersonItem";
+import { PersonComplete } from "@/types/people";
+import {
+  PersonItem,
+  PersonItemNotFound,
+  PersonItemPlaceHolder,
+} from "./PersonItem";
 import { Person } from "@/types/person";
 import { PersonAdd } from "./PersonAdd";
+import { PersonEdit } from "./PersonEdit";
 
 type Props = {
   eventId: number;
@@ -35,13 +40,16 @@ export const EventTabPeople = ({ eventId }: Props) => {
   }, []);
 
   //poeple
-  const [people, setPeople] = useState<People[]>([]);
+  const [people, setPeople] = useState<PersonComplete[]>([]);
   const [peopleLoading, setPoepleLoading] = useState<boolean>(false);
-  const [selectedPerson, setSelectedPerson] = useState<People>();
+  const [selectedPerson, setSelectedPerson] = useState<PersonComplete | null>(
+    null
+  );
 
   const loadPeople = async () => {
     try {
       if (selectedGroupId <= 0) return;
+      setSelectedPerson(null);
       setPeople([]);
       setPoepleLoading(true);
       const result = await PeopleApi.getAll(eventId, selectedGroupId);
@@ -51,6 +59,10 @@ export const EventTabPeople = ({ eventId }: Props) => {
       setPoepleLoading(true);
       alert(error.response.data);
     }
+  };
+
+  const handleEditButton = (person: PersonComplete) => {
+    setSelectedPerson(person);
   };
 
   // quando o event group for alterado, a função de buscar as pessoas é executada para listar as pessoas daquele grupo
@@ -87,10 +99,20 @@ export const EventTabPeople = ({ eventId }: Props) => {
                 refreshAction={loadPeople}
               />
             )}
+            {selectedPerson && (
+              <PersonEdit person={selectedPerson} refreshAction={loadPeople} />
+            )}
           </div>
           {!peopleLoading &&
             people?.length > 0 &&
-            people.map((item) => <div key={item.id}>{item.name}</div>)}
+            people.map((item) => (
+              <PersonItem
+                key={item.id}
+                item={item}
+                refreshAction={loadPeople}
+                onEdit={handleEditButton}
+              />
+            ))}
           {peopleLoading && (
             <>
               <PersonItemPlaceHolder />

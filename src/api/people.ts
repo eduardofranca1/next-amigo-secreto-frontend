@@ -1,12 +1,12 @@
 import { getCookie } from "cookies-next";
 import { req } from "./axios";
-import { AddPersonData, People, UpdatePerson } from "@/types/people";
+import { AddPersonData, PersonComplete, UpdatePerson } from "@/types/people";
 
 export const create = async (
   eventId: number,
   groupId: number,
   data: AddPersonData
-): Promise<People> => {
+): Promise<PersonComplete> => {
   try {
     const token = getCookie("token");
     const response = await req.post(
@@ -27,7 +27,7 @@ export const create = async (
 export const getAll = async (
   eventId: number,
   groupId: number
-): Promise<People[] | []> => {
+): Promise<PersonComplete[] | []> => {
   try {
     const token = getCookie("token");
     const response = await req.get(
@@ -48,7 +48,7 @@ export const getOne = async (
   eventId: number,
   groupId: number,
   id: number
-): Promise<People | undefined> => {
+): Promise<PersonComplete | undefined> => {
   try {
     const token = getCookie("token");
     const response = await req.get(
@@ -73,7 +73,7 @@ export const update = async (
 ) => {
   try {
     const token = getCookie("token");
-    const response = await req.post(
+    const response = await req.put(
       `/admin/events/${eventId}/groups/${groupId}/people/${id}`,
       data,
       {
